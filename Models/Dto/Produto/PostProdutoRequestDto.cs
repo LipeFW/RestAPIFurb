@@ -1,6 +1,6 @@
-﻿namespace RestAPIFurb.Models.Dto.Comanda
+﻿namespace RestAPIFurb.Models.Dto.Produto
 {
-    public class GetProdutoResponseDto
+    public class PostProdutoRequestDto
     {
         public int Id { get; set; }
         public string Nome { get; set; }
