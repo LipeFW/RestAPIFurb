@@ -65,9 +65,6 @@ namespace RestAPIFurb.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Put([FromRoute] int id, [FromBody] PutComandaRequestDto body)
         {
-            if (!body.IsValid())
-                return BadRequest(new { status = "Error", detalhes = "Há campos faltando ou inválidos na requisição" });
-
             var result = _comandaRepository.Put(id, body);
 
             if (!result)
