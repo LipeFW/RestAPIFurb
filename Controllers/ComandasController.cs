@@ -16,26 +16,31 @@ namespace RestAPIFurb.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetAll()
         {
-            return Ok();
+            var result = _comandaRepository.GetAll();
+
+            return Ok(result);
         }
 
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetById([FromRoute] int id)
         {
-            var ret = _comandaRepository.GetById(id);
+            var result = _comandaRepository.GetById(id);
 
-            return Ok(ret);
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] PostComandaBody body)
         {
-            var ret = _comandaRepository.Post(body);
+            var result = _comandaRepository.Post(body);
 
-            return Ok(ret);
+            return Ok(result);
         }
 
         [HttpPut]
@@ -49,9 +54,9 @@ namespace RestAPIFurb.Controllers
         [Route("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var ret = _comandaRepository.Delete(id);
+            var result = _comandaRepository.Delete(id);
 
-            if (ret)
+            if (result)
                 return Ok(new
                 {
                     success = new { text = "comanda removida" }
