@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RestAPIFurb.Models.Dto.Login
+﻿namespace RestAPIFurb.Models.Dto.Login
 {
     public class LoginResponseDto
     {

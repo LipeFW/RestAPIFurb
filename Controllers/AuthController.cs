@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using RestAPIFurb.Models;
 using RestAPIFurb.Models.Dto.Login;
-using RestAPIFurb.Repository.Interface;
 using RestAPIFurb.Service;
 
 namespace RestAPIFurb.Controllers
@@ -30,7 +28,7 @@ namespace RestAPIFurb.Controllers
             var result = await _signInManager.PasswordSignInAsync(content.Username, content.Password, false, true);
 
             if (result.Succeeded)
-                return Ok(new {token = _token.GenerateToken(content.Username) });
+                return Ok(new { token = _token.GenerateToken(content.Username) });
 
             return BadRequest("Usuário e/ou senha inválidos");
         }

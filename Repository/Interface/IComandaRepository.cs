@@ -1,5 +1,4 @@
-﻿using RestAPIFurb.Models;
-using RestAPIFurb.Models.Dto.Comanda.Get;
+﻿using RestAPIFurb.Models.Dto.Comanda.Get;
 using RestAPIFurb.Models.Dto.Comanda.Post;
 using RestAPIFurb.Models.Dto.Comanda.Put;
 

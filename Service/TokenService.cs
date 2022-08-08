@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using RestAPIFurb.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -24,7 +23,7 @@ namespace RestAPIFurb.Service
                 Audience = _configuration["Token:ValidoEm"],
                 Issuer = _configuration["Token:Emissor"],
                 Expires = DateTime.UtcNow.AddMinutes(double.Parse(_configuration["Token:ExpiracaoMinutos"])),
-                SigningCredentials = 
+                SigningCredentials =
                 new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
