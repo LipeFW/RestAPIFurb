@@ -68,7 +68,7 @@ namespace RestAPIFurb.Migrations
 
                     b.HasIndex("ComandaId");
 
-                    b.ToTable("Produto");
+                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("RestAPIFurb.Models.Produto", b =>

@@ -14,5 +14,6 @@ namespace RestAPIFurb.Models
         }
 
         public DbSet<Comanda> Comandas { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
     }
 }
