@@ -23,7 +23,7 @@ namespace RestAPIFurb.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetById([FromRoute]int id)
+        public IActionResult GetById([FromRoute] int id)
         {
             var ret = _comandaRepository.GetById(id);
 
@@ -49,8 +49,15 @@ namespace RestAPIFurb.Controllers
         [Route("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            return Ok(new {success = new { text = "comanda removida" }
-        });
+            var ret = _comandaRepository.Delete(id);
+
+            if (ret)
+                return Ok(new
+                {
+                    success = new { text = "comanda removida" }
+                });
+            else
+                return NotFound();
         }
     }
 }
