@@ -5,10 +5,10 @@ namespace RestAPIFurb.Repository.Interface
 {
     public interface IComandaRepository
     {
-        ICollection<Comanda> GetAll();
-        Comanda? GetById(int id);
-        Comanda Post(PostComandaBody comandaBody);
-        Comanda Put(int id, PostComandaBody body);
+        ICollection<GetComandaResponseDto> GetAll();
+        GetComandaResponseDto? GetById(int id);
+        GetComandaResponseDto Post(PostComandaRequestDto comandaBody);
+        GetComandaResponseDto Put(int id, PostComandaRequestDto body);
         bool Delete(int id);
     }
 }

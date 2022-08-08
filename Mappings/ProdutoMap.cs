@@ -13,6 +13,8 @@ namespace RestAPIFurb.Mappings
             builder.Property(p => p.Nome).HasMaxLength(255).IsRequired();
             builder.Property(p => p.Preco).IsRequired();
 
+            builder.HasOne(p => p.Comanda).WithMany(p => p.Produtos).OnDelete(DeleteBehavior.Cascade);
+
             builder.ToTable("Produtos");
         }
     }
