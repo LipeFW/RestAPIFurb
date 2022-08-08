@@ -13,35 +13,35 @@ namespace RestAPIFurb.Migrations
                 name: "Comandas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    ComandaId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdUsuario = table.Column<int>(type: "integer", nullable: false),
-                    NomeUsuario = table.Column<string>(type: "text", nullable: false),
-                    TelefoneUsuario = table.Column<string>(type: "text", nullable: false)
+                    NomeUsuario = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    TelefoneUsuario = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comandas", x => x.Id);
+                    table.PrimaryKey("PK_Comandas", x => x.ComandaId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    ProdutoId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nome = table.Column<string>(type: "text", nullable: false),
+                    Nome = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
                     Preco = table.Column<double>(type: "double precision", nullable: false),
                     ComandaId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produtos", x => x.Id);
+                    table.PrimaryKey("PK_Produtos", x => x.ProdutoId);
                     table.ForeignKey(
                         name: "FK_Produtos_Comandas_ComandaId",
                         column: x => x.ComandaId,
                         principalTable: "Comandas",
-                        principalColumn: "Id");
+                        principalColumn: "ComandaId");
                 });
 
             migrationBuilder.CreateIndex(

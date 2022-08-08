@@ -12,7 +12,7 @@ using RestAPIFurb.Models;
 namespace RestAPIFurb.Migrations
 {
     [DbContext(typeof(_DbContext))]
-    [Migration("20220808031851_Init")]
+    [Migration("20220808045357_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,51 +26,54 @@ namespace RestAPIFurb.Migrations
 
             modelBuilder.Entity("RestAPIFurb.Models.Comanda", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ComandaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ComandaId"));
 
                     b.Property<int>("IdUsuario")
                         .HasColumnType("integer");
 
                     b.Property<string>("NomeUsuario")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("TelefoneUsuario")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ComandaId");
 
-                    b.ToTable("Comandas");
+                    b.ToTable("Comandas", (string)null);
                 });
 
             modelBuilder.Entity("RestAPIFurb.Models.Produto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ProdutoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProdutoId"));
 
                     b.Property<int?>("ComandaId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<double>("Preco")
                         .HasColumnType("double precision");
 
-                    b.HasKey("Id");
+                    b.HasKey("ProdutoId");
 
                     b.HasIndex("ComandaId");
 
-                    b.ToTable("Produtos");
+                    b.ToTable("Produtos", (string)null);
                 });
 
             modelBuilder.Entity("RestAPIFurb.Models.Produto", b =>
