@@ -29,19 +29,19 @@ namespace RestAPIFurb.Repository
 
         }
 
-        public ICollection<Comanda> GetAll()
+        public ICollection<GetComandaResponseDto> GetAll()
         {
-            var result = _db.Comandas.Include(c => c.Produtos).ToList();
+            var result = _db.Comandas.Include(c => c.Produtos).Select(ComandaAdapter.FromDomain).ToList();
             return result;
         }
 
-        public Comanda? GetById(int id)
+        public GetComandaResponseDto? GetById(int id)
         {
-            var result = _db.Comandas.Include(c => c.Produtos).FirstOrDefault(x => x.Id == id);
+            var result = _db.Comandas.Include(c => c.Produtos).Select(ComandaAdapter.FromDomain).FirstOrDefault(x => x.Id == id);
             return result;
         }
 
-        public Comanda Post(PostComandaBody comandaBody)
+        public GetComandaResponseDto Post(PostComandaRequestDto comandaBody)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace RestAPIFurb.Repository
                 _db.Comandas.Add(comanda);
                 _db.SaveChanges();
 
-                return comanda;
+                return ComandaAdapter.FromDomain(comanda);
             }
             catch (Exception)
             {
@@ -59,7 +59,7 @@ namespace RestAPIFurb.Repository
             }
         }
 
-        public Comanda Put(int id, PostComandaBody body)
+        public GetComandaResponseDto Put(int id, PostComandaRequestDto body)
         {
             throw new NotImplementedException();
         }

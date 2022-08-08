@@ -1,6 +1,6 @@
 ﻿namespace RestAPIFurb.Models.Dto.Comanda
 {
-    public class PostProdutoBody
+    public class PostProdutoRequestDto
     {
         public int Id { get; set; }
         public string Nome { get; set; }

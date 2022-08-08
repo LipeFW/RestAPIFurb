@@ -36,7 +36,7 @@ namespace RestAPIFurb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] PostComandaBody body)
+        public IActionResult Post([FromBody] PostComandaRequestDto body)
         {
             var result = _comandaRepository.Post(body);
 
