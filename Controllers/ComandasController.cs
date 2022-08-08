@@ -48,7 +48,7 @@ namespace RestAPIFurb.Controllers
         public IActionResult Post([FromBody] PostComandaRequestDto body)
         {
             if (!body.IsValid())
-                return BadRequest(new {status = "Error", detalhes = "Há campos faltando ou inválidos na requisição" });
+                return BadRequest(new { status = "Error", detalhes = "Há campos faltando ou inválidos na requisição" });
 
             var result = _comandaRepository.Post(body);
 

@@ -6,12 +6,13 @@ namespace RestAPIFurb.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Nome { get; set; } = string.Empty;
+
+        [Required]
+        public string Nome { get; set; }
+
+        [Required]
         public double Preco { get; set; }
 
-        public Comanda Comanda { get; set; } = new Comanda();
-
-        public bool Validate() =>
-            !string.IsNullOrWhiteSpace(Nome);
+        public Comanda Comanda { get; set; }
     }
 }
