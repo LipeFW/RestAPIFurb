@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestAPIFurb.Models;
+using RestAPIFurb.Models.Adapter;
 using RestAPIFurb.Models.Dto.Comanda;
 using RestAPIFurb.Repository.Interface;
 
@@ -16,7 +17,7 @@ namespace RestAPIFurb.Repository
 
         public bool Delete(int id)
         {
-            var comandaToRemove = _db.Comandas.FirstOrDefault(x => x.Id == id);
+            var comandaToRemove = _db.Comandas.Find(id);
 
             if (comandaToRemove != null)
             {
@@ -24,33 +25,27 @@ namespace RestAPIFurb.Repository
                 _db.SaveChanges();
                 return true;
             }
-            else
-                return false;
+            return false;
 
         }
 
-        public Comanda Get()
+        public ICollection<Comanda> GetAll()
         {
-            throw new NotImplementedException();
+            var result = _db.Comandas.Include(c => c.Produtos).ToList();
+            return result;
         }
 
         public Comanda? GetById(int id)
         {
-            var ret = _db.Comandas.Where(x => x.Id == id).Include(x => x.Produtos).FirstOrDefault();
-            return ret;
+            var result = _db.Comandas.Include(c => c.Produtos).FirstOrDefault(x => x.ComandaId == id);
+            return result;
         }
 
-        public Comanda Post(PostComandaBody body)
+        public Comanda Post(PostComandaBody comandaBody)
         {
             try
             {
-                var comanda = new Comanda
-                {
-                    IdUsuario = body.IdUsuario,
-                    NomeUsuario = body.NomeUsuario,
-                    Produtos = body.Produtos,
-                    TelefoneUsuario = body.TelefoneUsuario
-                };
+                var comanda = ComandaAdapter.FromBody(comandaBody);
 
                 _db.Comandas.Add(comanda);
                 _db.SaveChanges();
