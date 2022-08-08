@@ -12,7 +12,7 @@ using RestAPIFurb.Models;
 namespace RestAPIFurb.Migrations
 {
     [DbContext(typeof(_DbContext))]
-    [Migration("20220808025107_Init")]
+    [Migration("20220808031851_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,7 +70,7 @@ namespace RestAPIFurb.Migrations
 
                     b.HasIndex("ComandaId");
 
-                    b.ToTable("Produto");
+                    b.ToTable("Produtos");
                 });
 
             modelBuilder.Entity("RestAPIFurb.Models.Produto", b =>

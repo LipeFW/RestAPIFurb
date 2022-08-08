@@ -25,7 +25,7 @@ namespace RestAPIFurb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produto",
+                name: "Produtos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -36,24 +36,24 @@ namespace RestAPIFurb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.Id);
+                    table.PrimaryKey("PK_Produtos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Produto_Comandas_ComandaId",
+                        name: "FK_Produtos_Comandas_ComandaId",
                         column: x => x.ComandaId,
                         principalTable: "Comandas",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Produto_ComandaId",
-                table: "Produto",
+                name: "IX_Produtos_ComandaId",
+                table: "Produtos",
                 column: "ComandaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Produto");
+                name: "Produtos");
 
             migrationBuilder.DropTable(
                 name: "Comandas");
