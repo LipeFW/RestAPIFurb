@@ -23,15 +23,5 @@ namespace RestAPIFurb.Models.Adapter
                 Preco = domain.Preco
             };
         }
-
-        //public static GetProdutoResponseDto FromDomain(Produto domain)
-        //{
-        //    return new GetProdutoResponseDto
-        //    {
-        //        Id = domain.Id,
-        //        Nome = domain.Nome,
-        //        Preco = domain.Preco
-        //    };
-        //}
     }
 }

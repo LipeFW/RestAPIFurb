@@ -43,13 +43,14 @@ namespace RestAPIFurb.Models.Adapter
             {
                 StatusCode = statusCode,
                 Result =
-                {
-                    Id = domain.Id,
-                    IdUsuario = domain.IdUsuario,
-                    NomeUsuario = domain.NomeUsuario,
-                    TelefoneUsuario = domain.TelefoneUsuario,
-                    Produtos = domain.Produtos.Select(ProdutoAdapter.FromDomain).ToList()
-                }
+                    new PostComandaResponseDto
+                    {
+                        Id = domain.Id,
+                        IdUsuario = domain.IdUsuario,
+                        NomeUsuario = domain.NomeUsuario,
+                        TelefoneUsuario = domain.TelefoneUsuario,
+                        Produtos = domain.Produtos.Select(ProdutoAdapter.FromDomain).ToList()
+                    }
             };
         }
     }
