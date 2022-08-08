@@ -37,7 +37,7 @@ namespace RestAPIFurb.Repository
 
         public Comanda? GetById(int id)
         {
-            var result = _db.Comandas.Include(c => c.Produtos).FirstOrDefault(x => x.ComandaId == id);
+            var result = _db.Comandas.Include(c => c.Produtos).FirstOrDefault(x => x.Id == id);
             return result;
         }
 

@@ -8,7 +8,7 @@ namespace RestAPIFurb.Models.Adapter
         {
             return new Produto
             {
-                ProdutoId = body.Id,
+                Id = body.Id,
                 Nome = body.Nome,
                 Preco = body.Preco
             };

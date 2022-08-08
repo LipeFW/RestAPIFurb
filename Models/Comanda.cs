@@ -5,7 +5,7 @@ namespace RestAPIFurb.Models
     public class Comanda
     {
         [Key]
-        public int ComandaId { get; set; }
+        public int Id { get; set; }
         public int IdUsuario { get; set; }
         public string NomeUsuario { get; set; }
         public string TelefoneUsuario { get; set; }

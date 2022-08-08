@@ -8,7 +8,7 @@ namespace RestAPIFurb.Mappings
     {
         public void Configure(EntityTypeBuilder<Comanda> builder)
         {
-            builder.HasKey(c => c.ComandaId);
+            builder.HasKey(c => c.Id);
 
             builder.Property(c => c.IdUsuario).IsRequired();
             builder.Property(c => c.NomeUsuario).HasMaxLength(255).IsRequired();

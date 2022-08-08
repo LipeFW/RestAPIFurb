@@ -8,13 +8,10 @@ namespace RestAPIFurb.Mappings
     {
         public void Configure(EntityTypeBuilder<Produto> builder)
         {
-            builder.HasKey(p => p.ProdutoId);
+            builder.HasKey(p => p.Id);
 
             builder.Property(p => p.Nome).HasMaxLength(255).IsRequired();
             builder.Property(p => p.Preco).IsRequired();
-
-            //builder.HasOne(p => p.Comanda).WithMany(p => p.Produtos)
-            //    .HasForeignKey(p => p.ComandaId).IsRequired();
 
             builder.ToTable("Produtos");
         }
