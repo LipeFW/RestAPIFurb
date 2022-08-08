@@ -1,4 +1,5 @@
-﻿using RestAPIFurb.Models.Dto.Comanda;
+﻿using RestAPIFurb.Models.Dto.Comanda.Get;
+using RestAPIFurb.Models.Dto.Comanda.Post;
 
 namespace RestAPIFurb.Models.Adapter
 {
@@ -15,15 +16,40 @@ namespace RestAPIFurb.Models.Adapter
             };
         }
 
-        public static GetComandaResponseDto FromDomain(Comanda domain)
+        public static GetComandaByIdResponseDto FromDomainToGetComandaByIdResponseDto(Comanda domain)
         {
-            return new GetComandaResponseDto
+            return new GetComandaByIdResponseDto
             {
-                Id = domain.Id,
                 IdUsuario = domain.IdUsuario,
                 NomeUsuario = domain.NomeUsuario,
                 TelefoneUsuario = domain.TelefoneUsuario,
                 Produtos = domain.Produtos.Select(ProdutoAdapter.FromDomain).ToList()
+            };
+        }
+
+        public static GetAllComandaResponseDto FromDomainToGetAllComandaResponseDto(Comanda domain)
+        {
+            return new GetAllComandaResponseDto
+            {
+                IdUsuario = domain.IdUsuario,
+                NomeUsuario = domain.NomeUsuario,
+                TelefoneUsuario = domain.TelefoneUsuario,
+            };
+        }
+
+        public static PostComandaResponsePayloadDto FromDomainToPostComandaResponseDto(Comanda domain, int statusCode)
+        {
+            return new PostComandaResponsePayloadDto
+            {
+                StatusCode = statusCode,
+                Result = 
+                {
+                    Id = domain.Id,
+                    IdUsuario = domain.IdUsuario,
+                    NomeUsuario = domain.NomeUsuario,
+                    TelefoneUsuario = domain.TelefoneUsuario,
+                    Produtos = domain.Produtos.Select(ProdutoAdapter.FromDomain).ToList() 
+                }
             };
         }
     }
