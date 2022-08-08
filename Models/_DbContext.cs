@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RestAPIFurb.Mappings;
 
 namespace RestAPIFurb.Models
 {
-    public class _DbContext : DbContext
+    public class _DbContext : IdentityDbContext
     {
         public _DbContext(DbContextOptions<_DbContext> options) : base(options)
         {
