@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestAPIFurb.Models;
 using RestAPIFurb.Models.Adapter;
-using RestAPIFurb.Models.Dto.Comanda;
+using RestAPIFurb.Models.Dto.Comanda.Get;
+using RestAPIFurb.Models.Dto.Comanda.Post;
+using RestAPIFurb.Models.Dto.Comanda.Put;
 using RestAPIFurb.Repository.Interface;
 
 namespace RestAPIFurb.Repository
@@ -29,19 +31,23 @@ namespace RestAPIFurb.Repository
 
         }
 
-        public ICollection<GetComandaResponseDto> GetAll()
+        public ICollection<GetAllComandaResponseDto> GetAll()
         {
-            var result = _db.Comandas.Include(c => c.Produtos).Select(ComandaAdapter.FromDomain).ToList();
+            var result = _db.Comandas.Include(c => c.Produtos).Select(ComandaAdapter.FromDomainToGetAllComandaResponseDto).ToList();
             return result;
         }
 
-        public GetComandaResponseDto? GetById(int id)
+        public GetComandaByIdResponseDto? GetById(int id)
         {
-            var result = _db.Comandas.Include(c => c.Produtos).Select(ComandaAdapter.FromDomain).FirstOrDefault(x => x.Id == id);
-            return result;
+            var result = _db.Comandas.Include(c => c.Produtos).FirstOrDefault(x => x.Id == id);
+
+            if (result == null)
+                return null;
+
+            return ComandaAdapter.FromDomainToGetComandaByIdResponseDto(result);
         }
 
-        public GetComandaResponseDto Post(PostComandaRequestDto comandaBody)
+        public PostComandaResponsePayloadDto Post(PostComandaRequestDto comandaBody)
         {
             try
             {
@@ -50,18 +56,46 @@ namespace RestAPIFurb.Repository
                 _db.Comandas.Add(comanda);
                 _db.SaveChanges();
 
-                return ComandaAdapter.FromDomain(comanda);
+                return ComandaAdapter.FromDomainToPostComandaResponseDto(comanda, StatusCodes.Status200OK);
             }
             catch (Exception)
             {
+                return ComandaAdapter.FromDomainToPostComandaResponseDto(new Comanda(), StatusCodes.Status400BadRequest);
 
-                throw;
             }
         }
 
-        public GetComandaResponseDto Put(int id, PostComandaRequestDto body)
+        public bool Put(int id, PutComandaRequestDto body)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var comandaToUpdate = _db.Comandas.Include(c => c.Produtos).FirstOrDefault(c => c.Id == id);
+
+                if (comandaToUpdate == null)
+                    return false;
+
+                foreach (var produto in body.Produtos)
+                {
+                    var produtoToUpdate = comandaToUpdate.Produtos.FirstOrDefault(x => x.Id == produto.Id);
+
+                    if (produtoToUpdate == null)
+                        break;
+
+                    if ((produto.Preco >= 0) && produtoToUpdate.Preco != produto.Preco)
+                        produtoToUpdate.Preco = produto.Preco;
+
+                    if (!string.IsNullOrWhiteSpace(produto.Nome) && produtoToUpdate.Nome != produto.Nome)
+                        produtoToUpdate.Nome = produto.Nome;
+
+                    _db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
